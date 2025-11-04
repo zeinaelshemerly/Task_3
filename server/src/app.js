@@ -7,7 +7,16 @@ import perkRoutes from './routes/perks.js';
 const app = express();
 
 app.use(morgan('dev'));
-app.use(cors({ origin: 'http://localhost:5000', credentials: false }));
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || origin.startsWith('http://localhost:')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: false
+}));
 app.use(express.json());
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
