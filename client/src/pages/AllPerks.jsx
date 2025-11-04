@@ -162,6 +162,7 @@ export default function AllPerks() {
         {perks.map(perk => (
           <Link
             key={perk._id}
+            to={`/perks/${perk._id}`}
             className="card hover:shadow-lg transition-shadow cursor-pointer"
           >
             <div className="font-semibold text-lg text-zinc-900 mb-2">{perk.title}</div>
